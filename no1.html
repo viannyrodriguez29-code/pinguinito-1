@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿ESTÁS SEGURA?</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #9b9696;
+            overflow: hidden;
+        }
+
+        /* Canvas lluvia */
+        #rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Contenido */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .tenor-gif-embed {
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        /* BOTONES (MISMA ESTÉTICA QUE EL CÓDIGO ANTERIOR) */
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .buttons a:active {
+            transform: scale(0.95);
+        }
+
+        .btn-si {
+            background: #4caf50;
+        }
+
+        .btn-no {
+            background: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lluvia -->
+    <canvas id="rain"></canvas>
+
+    <!-- Sonido lluvia -->
+    <audio id="rainSound" loop>
+        <source src="lluvia.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+
+        <!-- GIF triste -->
+        <div class="tenor-gif-embed"
+            data-postid="13188179327400395176"
+            data-share-method="host"
+            data-aspect-ratio="1"
+            data-width="100%">
+            <a href="https://tenor.com/view/heart-sad-sadness-heartbreak-heartbroken-gif-13188179327400395176">
+                Heart Sad Sticker
+            </a>
+        </div>
+
+        <h1>¿ESTÁS SEGURA? 😢</h1>
+
+        <p>¿Hice algo mal? ¿No te gustó la página? 💔</p>
+
+        <!-- BOTONES -->
+        <div class="buttons">
+            <a href="si.html" class="btn-si">ESTÁ BIEN, SÍ QUIERO</a>
+            <a href="no2.html" class="btn-no">NO QUIERO</a>
+        </div>
+
+    </div>
+
+    <!-- Tenor -->
+    <script async src="https://tenor.com/embed.js"></script>
+
+    <!-- JS lluvia + sonido -->
+    <script>
+        // 🌧️ Lluvia visual
+        const canvas = document.getElementById("rain");
+        const ctx = canvas.getContext("2d");
+        let drops = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 180; i++) {
+            drops.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                length: Math.random() * 20 + 10,
+                speed: Math.random() * 5 + 2
+            });
+        }
+
+        function drawRain() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "rgba(120, 120, 160, 0.5)";
+            ctx.lineWidth = 1;
+
+            drops.forEach(d => {
+                ctx.beginPath();
+                ctx.moveTo(d.x, d.y);
+                ctx.lineTo(d.x, d.y + d.length);
+                ctx.stroke();
+
+                d.y += d.speed;
+                if (d.y > canvas.height) {
+                    d.y = -d.length;
+                    d.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(drawRain);
+        }
+
+        drawRain();
+
+        // 🔊 Sonido de lluvia
+        const rainSound = document.getElementById("rainSound");
+        function startRainSound() {
+            rainSound.volume = 0.4;
+            rainSound.play();
+            document.removeEventListener("click", startRainSound);
+            document.removeEventListener("touchstart", startRainSound);
+        }
+
+        document.addEventListener("click", startRainSound);
+        document.addEventListener("touchstart", startRainSound);
+    </script>
+
+</body>
+</html>

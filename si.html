@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinguinito</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f3f3;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .tenor-gif-embed {
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- GIF -->
+        <div class="tenor-gif-embed"
+            data-postid="7001195074401125913"
+            data-share-method="host"
+            data-aspect-ratio="1.14667"
+            data-width="100%">
+        </div>
+
+        <h1>
+            YEEEY PROMETO MINIMIZAR LO MÁS QUE PUEDA EL DOLOR DE BAZO,  
+            TE QUIERO MUCHO MUCHO MI CORAZONCITO ❤️
+        </h1>
+
+        <p>
+            Prometo que intentaré ser mejor cada día por ti y por mí también.
+        </p>
+
+    </div>
+
+    <!-- Tenor -->
+    <script async src="https://tenor.com/embed.js"></script>
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <script>
+        // Inicializar EmailJS
+        (function(){
+            emailjs.init("0m0OkHGIRy-0IKc5g");
+        })();
+
+        // Enviar correo al cargar la página
+        window.onload = function () {
+            emailjs.send(
+                "service_8vk689b",      // SERVICE ID
+                "template_otj4hql",     // TEMPLATE ID CORRECTO
+                {
+                    message: "dijo que si!!!"
+                }
+            ).then(
+                function () {
+                    console.log("✅ Correo enviado correctamente");
+                },
+                function (error) {
+                    console.error("❌ Error al enviar correo:", error);
+                }
+            );
+        };
+    </script>
+
+</body>
+</html>
